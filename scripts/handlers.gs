@@ -410,6 +410,38 @@ func HandlerDrawHud()
 	for(i=0;i<DlgCount();i++) 
 		DialogDraw(i);
 
+    // Draw the inventory items names
+    HudColor ( 0xFFFFFF00 );
+
+    g_inv0 = GetInvName( GameGet(INV_DROPPED) );
+    g_inv1 = GetInvName( GameGet(INV_ITEM1) );
+    g_anim = GameGet(INV_DROPPEDFRAME);
+
+    w_inv0 = HudGetTextWidth(g_inv0);
+    w_inv1 = HudGetTextWidth(g_inv1);
+
+    y_pos = GameGet(INV_SCROLLPOS);
+
+    if(g_anim==0)
+    {
+        // No animation so just display static text
+        HudDrawText(fontid, 128-w_inv1/2, 24, w_inv1, 8, g_inv1, 0);
+    }
+    else
+    {
+        HudDrawText(fontid, 128-w_inv0/2, 24-(y_pos/2), w_inv0, 8, g_inv0, 0);
+        HudDrawText(fontid, 128-w_inv1/2, 32-(y_pos/2), w_inv1, 8, g_inv1, 0);
+
+        y_pos += 1;
+        GameSet(INV_SCROLLPOS, y_pos);
+
+        if(y_pos==17)
+        {
+            GameSet(INV_DROPPEDFRAME, 0 );
+            GameSet(INV_SCROLLPOS, 0);
+        }
+    }
+
 	// menu
 	HudShader( 0 );
 	HudColor( 0xffffffff );

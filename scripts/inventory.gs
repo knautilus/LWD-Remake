@@ -9,8 +9,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////
-// OUT: int; items count
-// Returns the current number of items from the inventory.
+// OUT: int(items count)
+// Counts current items in the inventory.
 /////////////////////////////////////////////////////////////////////////////////
 func InventoryCount()
 {
@@ -21,11 +21,11 @@ func InventoryCount()
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// IN: int; idx; object index
-// OUT: int; 0=no slots available in inventory, 1=success
-// Adds an item to the inventory, if possible.
+// IN: int(object index)
+// OUT: int(0=no slots available, 1=success)
+// Adds an item to the inventory.
 /////////////////////////////////////////////////////////////////////////////////
-func InventoryAdd( idx )
+func InventoryAdd( idx  )
 {
 	count = InventoryCount();
 	if(count==MAXINVENTORY) return 0; // inventory is full
@@ -34,9 +34,9 @@ func InventoryAdd( idx )
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// IN: int; idx; object index
-// OUT: int; 0=object not found in inventory, 1=success
-// Removes an item from the inventory.
+// IN: int(object index)
+// OUT: int(0=not found, 1=success)
+// Substracts an item from the inventory.
 /////////////////////////////////////////////////////////////////////////////////
 func InventorySub( idx )
 {
@@ -63,22 +63,22 @@ func InventorySub( idx )
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// Removes all items from the inventory.
+// Removes all items from the inventory. and restores to default
 /////////////////////////////////////////////////////////////////////////////////
 func InventoryClear()
 {
-	for(i=0;i<MAXINVENTORY;i++)
-		GameSet(G_INVENTORY+i,-1);
+
+    GameSet(INV_ITEM1, -2 );
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// IN: int; idx; object index
-// OUT: int; inventory slot or -1 if object not found in inventory
+// IN: int(object index)
+// OUT: int(inventory slot/-1)
 // Returns the coresponding inventory position for an item.
 /////////////////////////////////////////////////////////////////////////////////
 func InventoryFind( idx )
 {
-	count = InventoryCount();
+	count = 1;
 	for(i=0;i<count;i++)
 		if( GameGet(G_INVENTORY+i)==idx )
 			return i;
@@ -86,9 +86,9 @@ func InventoryFind( idx )
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// IN: int; slot; inventory slot position
-// OUT: int; object index or -1 if slot is empty
-// Returns the index of an item object placed on a specified inventory slot.
+// IN: int(inventory slot)
+// OUT: int(object index/-1)
+// Return an item index from an inventory slot.
 /////////////////////////////////////////////////////////////////////////////////
 func InventoryGet( slot )
 {
@@ -96,16 +96,19 @@ func InventoryGet( slot )
 	return GameGet(G_INVENTORY+slot);
 }
 
+
 /////////////////////////////////////////////////////////////////////////////////
-// IN: int; id; item object's id
-// OUT: int; 0=not in inventory, 1=prezent in the inventory
-// Tells if an item, specified by it's object's id, is currently prezent in the inventory or not.
+// IN: int(inventory slot)
+// OUT: str(object name)
+// Return an item name for its index from the inventory
 /////////////////////////////////////////////////////////////////////////////////
-func InventoryHasItem( id )
+func GetInvName ( idx )
 {
-	idx = ObjFind(id);
-	if(idx==-1) return 0;
-	return InventoryFind(idx)!=-1; 
+     if(idx==-1) return "NOTHING";
+     if(idx==-2) return "PRESS ENTER TO START";
+     
+     return ObjGetName(idx);
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////

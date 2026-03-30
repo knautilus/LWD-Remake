@@ -57,8 +57,8 @@ func GameStartLoad()
 	GameSet(G_RESTART,1);
 	
 	// INTRO
-	//BeginNewGame(); // use this to skip the MainMenu, for quick testing
-	MainMenu();
+	BeginNewGame(); // use this to skip the MainMenu, for quick testing
+	//MainMenu();
 }
 
 /////////////////////////////////////////////////////////////////////////////////

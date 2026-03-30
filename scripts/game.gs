@@ -146,15 +146,29 @@ func LoadUserData( file )
 /////////////////////////////////////////////////////////////////////////////////
 func BeginNewGame()
 {
-    GameSet(G_PAUSE,0);                            // unpause the game
-    PlayerSet(P_DISABLE,0);                        // enable player
-    PlayerSetPos(PLAYER_BEGINX,PLAYER_BEGINY);    // set begin position
-    MusicFade(0,1);                                // set music fade options
-    MusicPlay(MUSIC_DEFAULT);                    // play default music
+    GameSet(G_COVER,1);
+    MusicPlay(MUSIC_DEFAULT,0,1);
+    
+    while(true)
+    {
+        stop;
+        if( GetKeyHit(KEY_ACTION) ) break;
+        if( GetKeyHit(KEY_MENU) ) // some menu
+        {
+            OpenDialogFinish();
+        }
+    }
+    InventoryScroll();
+    ClearKeys();
+    GameSet(G_COVER,0);
+    GameSet(G_PAUSE,0);
+    ObjSet(ObjFind(300),O_STATUS,1);
+    PlayerSet(P_CREDITS,1);
+    PlayerSet(P_LIFE,100);
 
-    // just a hello message
-    Message(14,6,"HELLO WORLD!",COLOR_MAGENTA,COLOR_GREEN);
-    MessagePop();
+    // init player
+    PlayerSetPos(584,382);
+    PlayerSet(P_DISABLE,0);
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -182,20 +196,20 @@ func ActionObject_1()
     idx = ObjFind(1);
     if(ObjGet(idx,O_STATUS)==0)
     {
-    idxswitch1 = ObjFind(1);
-         flip = ObjGet(idxswitch1, O_FLIP);
-    flip ^= 1;
-    ObjSet(idxswitch1, O_FLIP, flip);
-    Message0(5,7,"YOU FLICK THE SWITCH");
-    MessagePop();
-    BrushSet(BrushFind(2),B_DRAW,0);    // floor
-    GameCommand(CMD_REFRESH);
-         ObjSet(idx,O_STATUS,1);
+        idxswitch1 = ObjFind(1);
+        flip = ObjGet(idxswitch1, O_FLIP);
+        flip ^= 1;
+        ObjSet(idxswitch1, O_FLIP, flip);
+        Message0(5,7,"YOU FLICK THE SWITCH");
+        MessagePop();
+        BrushSet(BrushFind(2),B_DRAW,0);    // floor
+        GameCommand(CMD_REFRESH);
+        ObjSet(idx,O_STATUS,1);
     }
     else
     {
-         Message0(5,7,"THE SWITCH IS STUCK");
-         MessagePop();
+        Message0(5,7,"THE SWITCH IS STUCK");
+        MessagePop();
     }
 }
 /////////////////////////////
@@ -215,19 +229,19 @@ func CollideObject_301_1( idx )
 /////////////////////////////
 func ActionObject_4()
 {
-   idx = InventoryScroll();
-   if(idx<=-1 ) return;
-   if(ObjGet(idx,O_ID)==108)
-   {
-    ObjSet(ObjFind(4),O_DISABLE,1);
-    GameSet(INV_ITEM1, ObjFind(108) );
-    BrushSet(BrushFind(3),B_DRAW,0);
-    GameCommand(CMD_REFRESH);
-   }
-      else
-   {
+    idx = InventoryScroll();
+    if(idx <= -1) return;
+    if(ObjGet(idx,O_ID)==108)
+    {
+        ObjSet(ObjFind(4),O_DISABLE,1);
+        GameSet(INV_ITEM1, ObjFind(108) );
+        BrushSet(BrushFind(3),B_DRAW,0);
+        GameCommand(CMD_REFRESH);
+    }
+    else
+    {
         DropObject( idx );
-   }
+    }
 }
 /////////////////////////////
 // Barrel
@@ -307,19 +321,19 @@ func ActionObject_10()
 /////////////////////////////
 func ActionObject_11()
 {
-   idx = InventoryScroll();
-   if( idx <= -1 ) return;
-   if(ObjGet(idx,O_ID)==108)
-   {
-    ObjSet(ObjFind(11),O_DISABLE,1);
-    GameSet(INV_ITEM1, ObjFind(108) );
-    ObjSet(ObjFind(102),O_DISABLE,0);
-    GameCommand(CMD_REFRESH);
-   }
-      else
-   {
+    idx = InventoryScroll();
+    if( idx <= -1 ) return;
+    if(ObjGet(idx,O_ID)==108)
+    {
+        ObjSet(ObjFind(11),O_DISABLE,1);
+        GameSet(INV_ITEM1, ObjFind(108) );
+        ObjSet(ObjFind(102),O_DISABLE,0);
+        GameCommand(CMD_REFRESH);
+    }
+    else
+    {
         DropObject( idx );
-   }
+    }
 }
 /////////////////////////////
 // Talk to Pig
@@ -329,17 +343,17 @@ func CollideObject_12_1( idx )
     objidx = ObjFind(12);
     if(ObjGet(objidx,O_STATUS)==0)
     {
-         Message1(6,5,"\"HELLO, I'M DIZZY.\nWHO ARE YOU?\"");
-         Message2(3,3,"\"I'M TOPS THE PIG,\nNICE TO MEET YOU.\"");
-         Message1(4,4,"\"I'M A LITTLE LOST.\nCOULD YOU HELP ME\nOUT AT ALL?\"");
-         Message2(3,4,"\"FOR SURE!\nONLY IF YOU CAN\nHELP ME.\"");
-         Message1(5,5,"\"OK\"");
-         Message2(5,3,"\"I'VE LOST MY KEY\nSOMEWHERE IN THE\nWOODS, I THINK.\nPLEASE BRING IT TO ME.\"");
-         Message1(5,6,"\"I'LL BE BACK\nIN A MINUTE!\"");
-         Message2(2,5,"\"WAIT!\nTAKE THIS CROWBAR,\nYOU MAY FIND IT USEFUL.\"");
-         MessagePop();
-      ObjSet(objidx,O_STATUS,1);
-    ObjSet(ObjFind(108),O_DISABLE,0);
+        Message1(6,5,"\"HELLO, I'M DIZZY.\nWHO ARE YOU?\"");
+        Message2(3,3,"\"I'M TOPS THE PIG,\nNICE TO MEET YOU.\"");
+        Message1(4,4,"\"I'M A LITTLE LOST.\nCOULD YOU HELP ME\nOUT AT ALL?\"");
+        Message2(3,4,"\"FOR SURE!\nONLY IF YOU CAN\nHELP ME.\"");
+        Message1(5,5,"\"OK\"");
+        Message2(5,3,"\"I'VE LOST MY KEY\nSOMEWHERE IN THE\nWOODS, I THINK.\nPLEASE BRING IT TO ME.\"");
+        Message1(5,6,"\"I'LL BE BACK\nIN A MINUTE!\"");
+        Message2(2,5,"\"WAIT!\nTAKE THIS CROWBAR,\nYOU MAY FIND IT USEFUL.\"");
+        MessagePop();
+        ObjSet(objidx,O_STATUS,1);
+        ObjSet(ObjFind(108),O_DISABLE,0);
     }
 }
 /////////////////////////////
@@ -351,35 +365,35 @@ func ActionObject_12()
     if(ObjGet(objidx,O_STATUS)==1)
     {
         idx = InventoryScroll();
-        if(idx<=-1 ) return;
-    if(ObjGet(idx,O_ID)==107)
-    {
-        idxdoor1 = ObjFind(16);
-             map = ObjGet(idxdoor1, O_MAP);
-        map ^= 16;
-        ObjSet(idxdoor1, O_MAP, map);
-             Message2(5,5,"\"OH THANKS BUDDY!\nNOW I CAN GET IN.\"");
-             Message1(3,6,"\"SO CAN YOU TELL ME\nHOW TO GET OUT\nOF THIS PLACE?\"");
-        if(ObjGet(ObjFind(6),O_STATUS)==0)
+        if(idx <= -1) return;
+        if(ObjGet(idx,O_ID)==107)
         {
-                 Message2(4,3,"\"YES, BY GOING LEFT,\nBUT THERE IS A BIG\nROCK IN THE WAY.\"");
+            idxdoor1 = ObjFind(16);
+            map = ObjGet(idxdoor1, O_MAP);
+            map ^= 16;
+            ObjSet(idxdoor1, O_MAP, map);
+            Message2(5,5,"\"OH THANKS BUDDY!\nNOW I CAN GET IN.\"");
+            Message1(3,6,"\"SO CAN YOU TELL ME\nHOW TO GET OUT\nOF THIS PLACE?\"");
+            if(ObjGet(ObjFind(6),O_STATUS)==0)
+            {
+                Message2(4,3,"\"YES, BY GOING LEFT,\nBUT THERE IS A BIG\nROCK ON THE WAY.\"");
+            }
+            else
+            {
+                Message2(4,3,"\"YES, BY GOING LEFT,\nBUT THERE IS A BIG\nTROLL ON THE WAY.\"");
+            }
+            Message1(7,6,"\"THANKS.\"");
+            MessagePop();
+            ObjSet(ObjFind(12),O_DISABLE,1);
+            ObjSet(ObjFind(113),O_DISABLE,0);
+            ObjSet(ObjFind(108),O_DISABLE,0);
         }
         else
         {
-                 Message2(4,3,"\"YES, BY GOING LEFT,\nBUT THERE IS A BIG\nTROLL ON THE WAY.\"");             
-        }        
-        Message1(7,6,"\"THANKS.\"");
-        MessagePop();
-        ObjSet(ObjFind(12),O_DISABLE,1);
-        ObjSet(ObjFind(113),O_DISABLE,0);
-        ObjSet(ObjFind(108),O_DISABLE,0);
-    }
-        else
-    {
-        DropObject( idx );
-        Message2(5,5,"\"I DON'T WANT THAT\"");
-        MessagePop();
-     }
+            DropObject( idx );
+            Message2(5,5,"\"I DON'T WANT THAT\"");
+            MessagePop();
+        }
     }
 }
 /////////////////////////////
@@ -433,7 +447,7 @@ func ActionObject_14()
         if(ObjGet(objidx,O_STATUS)==0) 
         {
             idx = InventoryScroll();
-            if(idx<=-1 ) return;
+            if(idx <= -1 ) return;
             if(ObjGet(idx,O_ID)==112)
             {
                 Message2(2,5,"\"AN APPLE FOR ME?\nTHAT'S VERY NICE,\nMR. EGG.\"");
@@ -510,7 +524,7 @@ func ActionObject_117()
 func CollideObject_15_1( idx )
 {
     Message0(5,6,"CONGRATULATIONS!\nYOU'VE LEFT\nTHE LOST WOODS!");
-    MessagePop();        
+    MessagePop();
     GameCommand(CMD_START);
 }
 /////////////////////////////
