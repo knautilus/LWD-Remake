@@ -155,7 +155,7 @@ func BeginNewGame()
         if( GetKeyHit(KEY_ACTION) ) break;
         if( GetKeyHit(KEY_MENU) ) // some menu
         {
-            OpenDialogFinish();
+            OpenDialogMainMenu();
         }
     }
     InventoryScroll();
