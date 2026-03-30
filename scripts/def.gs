@@ -16,6 +16,10 @@
 #def FLIPY			2			// flip y (bit value)
 #def FLIPR			4			// flip rotate (bit value)
 
+#def MAXCREDITS		1			// max number of credits
+#def MAXCOINS		20			// max number of coins to find
+#def MAXINVENTORY	1			// max number of inventory items ( don't exceed G_USER-G_INVENTORY )
+
 #def PTILE_IDLE		10			// default player's idle tile id
 #def PTILE_WALK		11			// default player's walk tile id
 #def PTILE_UP		12
@@ -85,5 +89,16 @@
 // player variables starting from P_USER=64 up to P_MAX=128
 // ...
 
+// Custom Game Def
+#def INV_ITEM1           50
+#def INV_DROPPED         53
+#def INV_DROPPEDFRAME    54
+#def INV_SCROLLPOS       55
+
+#def G_ROOMVISITED       100
+int g_firstrun
+int g_lastkey
+
+#def O_C            38 
 
 /////////////////////////////////////////////////////////////////////////////////

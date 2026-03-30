@@ -32,6 +32,35 @@ func Action()
 }
 
 /////////////////////////////////////////////////////////////////////////////////
+// IN: idxin (Object Index: To be added to the inventory)
+// Scrolls items through the inventory
+/////////////////////////////////////////////////////////////////////////////////
+func InventoryScroll( idxin )
+{
+      // Refuse pickup if pickup is scrolling
+      if(GameGet(INV_DROPPEDFRAME)==1) return;
+      
+      // Get the object index, of the item being picked up if available, if not set to nothing ( -1 )
+      if(!?idxin) idxin = -1;
+
+      idx = GameGet(INV_ITEM1);
+      GameSet(INV_DROPPED, (GameGet(INV_ITEM1)));
+      GameSet(INV_ITEM1, idxin );
+      if(idx==-1)
+      { SamplePlay(FX_BEEP1); }
+      else
+      if(idxin!=-1)
+      { SamplePlay(FX_COIN); }
+      else
+      { SamplePlay(FX_COIN); }
+
+      GameSet(INV_DROPPEDFRAME,1);
+
+      // Return the object index of a dropped item
+      return idx;
+}
+
+/////////////////////////////////////////////////////////////////////////////////
 // OUT: int; object index or -1 if not found
 // Finds the first pickable object that the player stands in front of.
 // Called by Action(), see PlayerTouchObject().

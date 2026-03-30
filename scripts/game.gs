@@ -9,22 +9,22 @@
 // RoomsSetNames, ObjectsSetNames, RoomSetCustomText, SaveUserData, LoadUserData, BeginNewGame
 //
 // Rooms interaction callbacks:
-// UpdateRoom_RX_RY()			- called by HandlerGameUpdate while player is in room RX,RY (non-latent)
-// AfterRoom_RX_RY()			- called by HandlerGameAfterUpdate while player is in room RX,RY (non-latent)
-// OpenRoom_RX_RY()				- called by HandlerRoomOpen when room RX,RY is opened (non-latent)
-// CloseRoom_RX_RY()			- called by HandlerRoomClose when room RX,RY is closed (non-latent)
-// OutRoom_RX_RY()				- called by HandlerRoomOut when player wants to exit room RX,RY (can reposition player here) (non-latent)
+// UpdateRoom_RX_RY()            - called by HandlerGameUpdate while player is in room RX,RY (non-latent)
+// AfterRoom_RX_RY()            - called by HandlerGameAfterUpdate while player is in room RX,RY (non-latent)
+// OpenRoom_RX_RY()                - called by HandlerRoomOpen when room RX,RY is opened (non-latent)
+// CloseRoom_RX_RY()            - called by HandlerRoomClose when room RX,RY is closed (non-latent)
+// OutRoom_RX_RY()                - called by HandlerRoomOut when player wants to exit room RX,RY (can reposition player here) (non-latent)
 //
 // Objects interaction callbacks:
-// PickupObject_ID()			- called when picking up item ID (latent)
-// DropObject_ID()				- called when droping item ID (latent)
-// ActionObject_ID()			- called when player hits ACTION key on object ID (latent)
-// UseObject_ID( idx )			- called when player wants to use object idx (from inventory) over the ID object (from the map) (latent)
-// CollideObject_ID_MODE()		- called when player collides with object ID in mode MODE (0=exit from collision, 1=just entered collision, 2=continuing to collide) (latent)
+// PickupObject_ID()            - called when picking up item ID (latent)
+// DropObject_ID()                - called when droping item ID (latent)
+// ActionObject_ID()            - called when player hits ACTION key on object ID (latent)
+// UseObject_ID( idx )            - called when player wants to use object idx (from inventory) over the ID object (from the map) (latent)
+// CollideObject_ID_MODE()        - called when player collides with object ID in mode MODE (0=exit from collision, 1=just entered collision, 2=continuing to collide) (latent)
 //
 // Player callbacks:
-// PlayerDeathMessage( death ) 	- called by PlayerLoseLife and sould just return the death message text. return "" for no death message box (latent)
-// RespawnPlayer_DEATH()		- called by PlayerLoseLife for custom death respawns. DEATH is the value of player's P_DEATH property
+// PlayerDeathMessage( death )     - called by PlayerLoseLife and sould just return the death message text. return "" for no death message box (latent)
+// RespawnPlayer_DEATH()        - called by PlayerLoseLife for custom death respawns. DEATH is the value of player's P_DEATH property
 //
 // ID, RX, RY, MODE are to pe replaced with coresponding numbers
 //
@@ -38,7 +38,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 func RoomsSetNames()
 {
-	RoomsLoadNames(ROOM_NAMESFILE);
+    RoomsLoadNames(ROOM_NAMESFILE);
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,23 @@ func RoomsSetNames()
 /////////////////////////////////////////////////////////////////////////////////
 func ObjectsSetNames()
 {
-	// ...
+// Items
+    ObjSetName( ObjFind(100), "TUFT OF GRASS" );
+    ObjSetName( ObjFind(101), "TUFT OF GRASS" );
+    ObjSetName( ObjFind(102), "A COIN" );
+    ObjSetName( ObjFind(103), "A PIECE OF RAILING" );
+    ObjSetName( ObjFind(104), "A PIECE OF RAILING" );
+    ObjSetName( ObjFind(105), "A COIN" );
+    ObjSetName( ObjFind(106), "HEAVY ROCK" );
+    ObjSetName( ObjFind(107), "A KEY" );
+    ObjSetName( ObjFind(108), "A STRONG CROWBAR" );
+    ObjSetName( ObjFind(109), "A RUSTY OLD PICKAXE" );
+    ObjSetName( ObjFind(110), "AN EMPTY BUCKET" );
+    ObjSetName( ObjFind(111), "A BUCKET OF WATER" );
+    ObjSetName( ObjFind(112), "A FRESH GREEN APPLE" );
+    ObjSetName( ObjFind(113), "A COIN" );
+    ObjSetName( ObjFind(114), "A DAGGER" );
+    ObjSetName( ObjFind(115), "STRONG JACK" );
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -69,8 +85,8 @@ func ObjectsSetNames()
 /////////////////////////////////////////////////////////////////////////////////
 func RoomSetCustomText( rx, ry, idx, refstr )
 {
-	// println("RCT: ",rx,",",ry,",",idx," = ",(*refstr));
-	// ...
+    // println("RCT: ",rx,",",ry,",",idx," = ",(*refstr));
+    // ...
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -83,9 +99,9 @@ func RoomSetCustomText( rx, ry, idx, refstr )
 /////////////////////////////////////////////////////////////////////////////////
 func PlayerDeathMessage( death )
 {
-	if(death==-1)					return "";
-	// ...
-	return "YOU HAVE DIED!";		// default
+    if(death==-1)                    return "";
+    // ...
+    return "YOU HAVE DIED!";        // default
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -98,8 +114,8 @@ func PlayerDeathMessage( death )
 /////////////////////////////////////////////////////////////////////////////////
 func SaveUserData( file )
 {
-	// ...
-	return 1;
+    // ...
+    return 1;
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -116,8 +132,8 @@ func SaveUserData( file )
 /////////////////////////////////////////////////////////////////////////////////
 func LoadUserData( file )
 {
-	// ...
-	return 1;
+    // ...
+    return 1;
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -130,21 +146,378 @@ func LoadUserData( file )
 /////////////////////////////////////////////////////////////////////////////////
 func BeginNewGame()
 {
-	GameSet(G_PAUSE,0);							// unpause the game
-	PlayerSet(P_DISABLE,0);						// enable player
-	PlayerSetPos(PLAYER_BEGINX,PLAYER_BEGINY);	// set begin position
-	MusicFade(0,1);								// set music fade options
-	MusicPlay(MUSIC_DEFAULT);					// play default music
+    GameSet(G_PAUSE,0);                            // unpause the game
+    PlayerSet(P_DISABLE,0);                        // enable player
+    PlayerSetPos(PLAYER_BEGINX,PLAYER_BEGINY);    // set begin position
+    MusicFade(0,1);                                // set music fade options
+    MusicPlay(MUSIC_DEFAULT);                    // play default music
 
-	// just a hello message
-	Message(14,6,"HELLO WORLD!",COLOR_MAGENTA,COLOR_GREEN);
-	MessagePop();
+    // just a hello message
+    Message(14,6,"HELLO WORLD!",COLOR_MAGENTA,COLOR_GREEN);
+    MessagePop();
 }
 
 /////////////////////////////////////////////////////////////////////////////////
 // Interactions
 /////////////////////////////////////////////////////////////////////////////////
 
-//...
+/////////////////////////////
+// Move player up
+/////////////////////////////
+func CollideObject_99_1( idx )
+{
+    PlayerSet(P_Y,254);
+}
+func CollideObject_98_1( idx )
+{
+    y=PlayerGet(P_Y);
+    y -= 4;
+    PlayerSet(P_Y,y);
+}
+/////////////////////////////
+// Switch
+/////////////////////////////
+func ActionObject_1()
+{
+    idx = ObjFind(1);
+    if(ObjGet(idx,O_STATUS)==0)
+    {
+    idxswitch1 = ObjFind(1);
+         flip = ObjGet(idxswitch1, O_FLIP);
+    flip ^= 1;
+    ObjSet(idxswitch1, O_FLIP, flip);
+    Message0(5,7,"YOU FLICK THE SWITCH");
+    MessagePop();
+    BrushSet(BrushFind(2),B_DRAW,0);    // floor
+    GameCommand(CMD_REFRESH);
+         ObjSet(idx,O_STATUS,1);
+    }
+    else
+    {
+         Message0(5,7,"THE SWITCH IS STUCK");
+         MessagePop();
+    }
+}
+/////////////////////////////
+// Teleport
+/////////////////////////////
+func CollideObject_301_1( idx )
+{
+    PlayerTransport();
+    WaitFrames(10);
+    PlayerSetPos(928,344);
+    PlayerTransport();
+    PlayerEnterIdle();
+    WaitFrames(10);
+}
+/////////////////////////////
+// Trapdoor
+/////////////////////////////
+func ActionObject_4()
+{
+   idx = InventoryScroll();
+   if(idx<=-1 ) return;
+   if(ObjGet(idx,O_ID)==108)
+   {
+    ObjSet(ObjFind(4),O_DISABLE,1);
+    GameSet(INV_ITEM1, ObjFind(108) );
+    BrushSet(BrushFind(3),B_DRAW,0);
+    GameCommand(CMD_REFRESH);
+   }
+      else
+   {
+        DropObject( idx );
+   }
+}
+/////////////////////////////
+// Barrel
+/////////////////////////////
+func ActionObject_7()
+{
+   idx = InventoryScroll();
+   if(idx<=-1 ) return;
+   if(ObjGet(idx,O_ID)==108)
+   {
+    ObjSet(ObjFind(7),O_DISABLE,1);
+    GameSet(INV_ITEM1, ObjFind(108) );
+    ObjSet(ObjFind(109),O_DISABLE,0);
+    GameCommand(CMD_REFRESH);
+   }
+      else
+   {
+        DropObject( idx );
+   }
+}
+/////////////////////////////
+// Rock
+/////////////////////////////
+func ActionObject_6()
+{
+   idx = InventoryScroll();
+   if(idx<=-1 ) return;
+   if(ObjGet(idx,O_ID)==109)
+   {
+    BrushSet(BrushFind(5),B_DRAW,0);
+    ObjSet(ObjFind(6),O_STATUS,1);
+    ObjSet(ObjFind(6),O_DISABLE,1);
+    GameCommand(CMD_REFRESH);
+   }
+      else
+   {
+        DropObject( idx );
+   }
+}
+/////////////////////////////
+// Water
+/////////////////////////////
+func ActionObject_8()
+{
+   idx = InventoryScroll();
+   if( idx <= -1 ) return;
+   if(ObjGet(idx,O_ID)==110)
+   {
+    ObjSet(ObjFind(8),O_DISABLE,1);
+    GameSet(INV_ITEM1, ObjFind(111) );
+    GameCommand(CMD_REFRESH);
+   }
+      else
+   {
+        DropObject( idx );
+   }
+}
+/////////////////////////////
+// Fire
+/////////////////////////////
+func ActionObject_10()
+{
+   idx = InventoryScroll();
+   if( idx <= -1 ) return;
+   if(ObjGet(idx,O_ID)==111)
+   {
+    ObjSet(ObjFind(9),O_DISABLE,1);
+    GameCommand(CMD_REFRESH);
+   }
+      else
+   {
+        DropObject( idx );
+   }
+}
+/////////////////////////////
+// Barrel 2
+/////////////////////////////
+func ActionObject_11()
+{
+   idx = InventoryScroll();
+   if( idx <= -1 ) return;
+   if(ObjGet(idx,O_ID)==108)
+   {
+    ObjSet(ObjFind(11),O_DISABLE,1);
+    GameSet(INV_ITEM1, ObjFind(108) );
+    ObjSet(ObjFind(102),O_DISABLE,0);
+    GameCommand(CMD_REFRESH);
+   }
+      else
+   {
+        DropObject( idx );
+   }
+}
+/////////////////////////////
+// Talk to Pig
+/////////////////////////////
+func CollideObject_12_1( idx )
+{
+    objidx = ObjFind(12);
+    if(ObjGet(objidx,O_STATUS)==0)
+    {
+         Message1(6,5,"\"HELLO, I'M DIZZY.\nWHO ARE YOU?\"");
+         Message2(3,3,"\"I'M TOPS THE PIG,\nNICE TO MEET YOU.\"");
+         Message1(4,4,"\"I'M A LITTLE LOST.\nCOULD YOU HELP ME\nOUT AT ALL?\"");
+         Message2(3,4,"\"FOR SURE!\nONLY IF YOU CAN\nHELP ME.\"");
+         Message1(5,5,"\"OK\"");
+         Message2(5,3,"\"I'VE LOST MY KEY\nSOMEWHERE IN THE\nWOODS, I THINK.\nPLEASE BRING IT TO ME.\"");
+         Message1(5,6,"\"I'LL BE BACK\nIN A MINUTE!\"");
+         Message2(2,5,"\"WAIT!\nTAKE THIS CROWBAR,\nYOU MAY FIND IT USEFUL.\"");
+         MessagePop();
+      ObjSet(objidx,O_STATUS,1);
+    ObjSet(ObjFind(108),O_DISABLE,0);
+    }
+}
+/////////////////////////////
+// Pig
+/////////////////////////////
+func ActionObject_12()
+{
+    objidx = ObjFind(12);
+    if(ObjGet(objidx,O_STATUS)==1)
+    {
+        idx = InventoryScroll();
+        if(idx<=-1 ) return;
+    if(ObjGet(idx,O_ID)==107)
+    {
+        idxdoor1 = ObjFind(16);
+             map = ObjGet(idxdoor1, O_MAP);
+        map ^= 16;
+        ObjSet(idxdoor1, O_MAP, map);
+             Message2(5,5,"\"OH THANKS BUDDY!\nNOW I CAN GET IN.\"");
+             Message1(3,6,"\"SO CAN YOU TELL ME\nHOW TO GET OUT\nOF THIS PLACE?\"");
+        if(ObjGet(ObjFind(6),O_STATUS)==0)
+        {
+                 Message2(4,3,"\"YES, BY GOING LEFT,\nBUT THERE IS A BIG\nROCK IN THE WAY.\"");
+        }
+        else
+        {
+                 Message2(4,3,"\"YES, BY GOING LEFT,\nBUT THERE IS A BIG\nTROLL ON THE WAY.\"");             
+        }        
+        Message1(7,6,"\"THANKS.\"");
+        MessagePop();
+        ObjSet(ObjFind(12),O_DISABLE,1);
+        ObjSet(ObjFind(113),O_DISABLE,0);
+        ObjSet(ObjFind(108),O_DISABLE,0);
+    }
+        else
+    {
+        DropObject( idx );
+        Message2(5,5,"\"I DON'T WANT THAT\"");
+        MessagePop();
+     }
+    }
+}
+/////////////////////////////
+// Troll
+/////////////////////////////
+func CollideObject_13_1( idx )
+{
+    objidx = ObjFind(13);
+    if(ObjGet(objidx,O_STATUS)==0)
+    {
+        Message2(5,4,"\"YOU CAN'T PASS.\"");
+        Message1(4,6,"\"WHY ARE YOU HERE,\nROCKWART?\"");
+        Message2(1,5,"\"BECAUSE I'M A TROLL.\nTROLLS ARE SUPPOSED TO BE\nMEAN TO LITTLE EGGS.\"");
+        MessagePop();
+        ObjSet(objidx,O_STATUS,1);
+        ObjSet(ObjFind(14),O_DISABLE,0);
+    }
+    if(ObjGet(objidx,O_STATUS)==1)
+    {
+        PlayerEnterJump(1,DIZ_POW+1);
+    }
+}
+/////////////////////////////
+// Apple & Coins
+/////////////////////////////
+func ActionObject_14()
+{
+    objidx = ObjFind(14);
+    if(ObjGet(objidx,O_STATUS)==1)
+    {
+        if(PlayerGet(P_COINS)>=MAXCOINS)
+        {
+            money = PlayerGet(P_COINS)-MAXCOINS;
+            PlayerSet(P_COINS,money);
+            GameCommand(CMD_REFRESH);
+            Message2(4,5,"\"WOW! TWENTY GOLD COINS.\nIMPRESSIVE! NOW\nYOU CAN PASS!\"");
+            MessagePop();
+            ObjSet(ObjFind(15),O_DISABLE,0);
+            BrushSet(BrushFind(26),B_DRAW,0);
+            ObjSet(ObjFind(13),O_STATUS,2);
+            GameCommand(CMD_REFRESH);
+        }
+        else
+        {
+            idx = InventoryScroll();
+            if(idx>-1) DropObject(idx);
+        }
+    }
+    else
+    {
+        if(ObjGet(objidx,O_STATUS)==0) 
+        {
+            idx = InventoryScroll();
+            if(idx<=-1 ) return;
+            if(ObjGet(idx,O_ID)==112)
+            {
+                Message2(2,5,"\"AN APPLE FOR ME?\nTHAT'S VERY NICE,\nMR. EGG.\"");
+                Message1(3,7,"\"SO... CAN I PASS NOW?\"");
+                Message2(3,6,"\"OKAY. WHEN YOU\nPAY ME 20 DIAMONDS.\"");
+                Message1(4,5,"\"DON'T YOU MEAN COINS?\"");
+                Message2(2,7,"\"WHATEVER, ANYTHING\nSHINY IS GOOD.\"");
+                MessagePop();
+                ObjSet(objidx,O_STATUS,1);
+            }
+            else
+            {
+                DropObject(idx);
+            }
+        }
+    }
+}
+/////////////////////////////
+// Crusher Trigger
+/////////////////////////////
+func CollideObject_20_1( idx )
+{
+    PlayerSet(P_LAYER,-1);
+    PlayerSet(P_LIFE,0);
+    PlayerSet(P_DEATH,DANGER_CRUSHER);
+    ObjSet(ObjFind(19),O_DISABLE,0);
+    ObjSet(ObjFind(20),B_DRAW,3);
+    ObjSet(ObjFind(21),B_DRAW,3);
+    ObjSet(ObjFind(23),B_DRAW,3);
+    ObjSet(ObjFind(24),B_DRAW,3);
+    ObjSet(ObjFind(22),O_DISABLE,1);
+}
+/////////////////////////////
+// Tree Trunk
+/////////////////////////////
+func ActionObject_17()
+{
+    idx = InventoryScroll();
+    if( idx <= -1 ) return;
+    if(ObjGet(idx,O_ID)==114)
+    {
+        ObjSet(ObjFind(17),O_DISABLE,1);
+        ObjSet(ObjFind(105),O_DISABLE,0);
+        GameCommand(CMD_REFRESH);
+    }
+    else
+    {
+        DropObject( idx );
+    }
+}
+/////////////////////////////
+// Stop Crusher
+/////////////////////////////
+func ActionObject_117()
+{
+    idx = InventoryScroll();
+    if( idx <= -1 ) return;
+    if(ObjGet(idx,O_ID)==115)
+    {
+        ObjSet(ObjFind(20),O_DISABLE,1);
+        ObjSet(ObjFind(25),O_DISABLE,0);
+        Message0(5,6,"THE EXTENDED JACK\nPREVENTS THE CRUSHER\nFROM DESCENDING!");
+        MessagePop();
+        GameCommand(CMD_REFRESH);
+    }
+    else
+    {
+        DropObject( idx );
+    }
+}
+/////////////////////////////
+// The End
+/////////////////////////////
+func CollideObject_15_1( idx )
+{
+    Message0(5,6,"CONGRATULATIONS!\nYOU'VE LEFT\nTHE LOST WOODS!");
+    MessagePop();        
+    GameCommand(CMD_START);
+}
+/////////////////////////////
+// You can't drop items here
+/////////////////////////////
+func ActionObject_99()
+{
+}
 
 /////////////////////////////////////////////////////////////////////////////////
