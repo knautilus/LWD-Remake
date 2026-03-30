@@ -534,4 +534,71 @@ func ActionObject_99()
 {
 }
 
+func UpdateRoom_1_2() // SPIDER
+{
+     AIUpdateTrain(ObjFind(201));
+     AIUpdateChainLink(ObjFind(200));
+}
+func UpdateRoom_2_4() // SPIDER
+{
+     AIUpdateTrain(ObjFind(205));
+     AIUpdateChainLink(ObjFind(204));
+}
+func UpdateRoom_5_3() // SPIDER
+{
+     AIUpdateTrain(ObjFind(209));
+     AIUpdateChainLink(ObjFind(208));
+}
+func UpdateRoom_3_4() // SPIDER
+{
+     AIUpdateTrain(ObjFind(212));
+}
+func UpdateRoom_4_5() // TELEPORT
+{
+   idx = ObjFind(300);
+   y = ObjGet(idx,O_Y);
+   if(ObjGet(idx,O_STATUS)==2)
+   {
+     y -= 1;
+     if(y<=728)
+     {
+       y=728;
+       ObjSet(idx,O_STATUS,1);
+     }
+   }
+   else
+   {
+     y += 1;
+     if(y>=751)
+     {
+       y=751;
+       ObjSet(idx,O_STATUS,2);
+
+     }
+   }
+   c = ObjGet(idx,O_C);
+   c += 1;
+
+   if ( c == 8 ) { c = 0; }
+
+   if ( c == 0 ) { ObjSet(idx,O_COLOR,COLOR_BLACK);   }
+   else
+   if ( c == 1 ) { ObjSet(idx,O_COLOR,COLOR_BLUE);    }
+   else
+   if ( c == 2 ) { ObjSet(idx,O_COLOR,COLOR_RED);     }
+   else
+   if ( c == 3 ) { ObjSet(idx,O_COLOR,COLOR_MAGENTA); }
+   else
+   if ( c == 4 ) { ObjSet(idx,O_COLOR,COLOR_GREEN);   }
+   else
+   if ( c == 5 ) { ObjSet(idx,O_COLOR,COLOR_CYAN);    }
+   else
+   if ( c == 6 ) { ObjSet(idx,O_COLOR,COLOR_YELLOW);   }
+   else
+   if ( c == 7 ) { ObjSet(idx,O_COLOR,COLOR_WHITE);   }
+
+   ObjSet(idx,O_C,c);
+   ObjSet(idx,O_Y,y);
+}
+
 /////////////////////////////////////////////////////////////////////////////////

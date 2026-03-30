@@ -83,11 +83,37 @@
 #def G_RESTART		240			// true after first start, false after that, see GameStartLoad()
 // ...
 
-// object variables starting from O_USER=32 up to O_MAX=48
-// ...
+// objects starting from O_USER=32
+#def O_DEATH			39		// cause of death for class kill and hurt
+#def O_WAYPOINTSPEED	32		// speed value for class waypoint
+#def O_WAYPOINTFLIP		33		// flip value for class waypoint
 
-// player variables starting from P_USER=64 up to P_MAX=128
-// ...
+// player starting from P_USER=64
+#def P_DEATH			64		// cause of death
+
+// Dangers
+#def DANGER_NONE        0
+#def DANGER_DEFAULT     1
+#def DANGER_WATER       2
+#def DANGER_FIRE        3
+#def DANGER_SPIKES      4
+#def DANGER_CRUSHER     5
+#def DANGER_BAT         6
+#def DANGER_BIRD        7
+#def DANGER_SPIDER      8
+#def DANGER_FISH        9
+#def DANGER_GHOST       10
+#def DANGER_LAVA        11
+#def DANGER_RAIN        12
+#def DANGER_ACIDRAIN    13
+#def DANGER_VAMPIRE     14
+#def DANGER_DRAGON      15
+#def DANGER_SWAMP       16
+#def DANGER_MAGICBOLT   17
+#def DANGER_EAGLE       18
+#def DANGER_MAGICWALL   19
+#def DANGER_OCEAN       98
+#def DANGER_FALL        99
 
 // Custom Game Def
 #def INV_ITEM1           50

@@ -301,29 +301,18 @@ func HandlerPlayerUpdate()
 		PlayerSet(P_Y, PlayerGet(P_Y)+1);
 	}
 	
-	// Check WaterPlay
-	if( SUPPORT_WATERPLAY ) 
-		PlayerUpdateWaterPlay();
-	
+	// Check Player Water
+	if(PlayerGet(P_MATCENTER)==MAT_WATER)
+	{
+		PlayerSet(P_DEATH,DANGER_WATER);
+		PlayerSet(P_LIFE,0);
+	}
+
 	// Check Player damage
-	if(IsMaterialInsidePlayer(MAT_KILL)) 
-	{
-		if(PlayerGet(P_LIFE)>0)
-		{
-			PlayerSet(P_LIFE,0);
-			PlayerSet(P_DEATH,0); // set cause of death if needed
-		}
-	}
-	else
-	if(IsMaterialInsidePlayer(MAT_HURT)) 
-	{
-		if(PlayerGet(P_LIFE)>0)
-		{
-			PlayerHurt(DIZ_HURT);
-			if(PlayerGet(P_LIFE)==0)
-				PlayerSet(P_DEATH,0); // set cause of death if needed
-		}
-	}
+	if(IsMaterialInsidePlayer(MAT_KILL))
+		PlayerSet(P_LIFE,0);
+	else if(IsMaterialInsidePlayer(MAT_HURT))
+		PlayerHurt(DIZ_HURT);
 
 	// Check Player must die
 	if(PlayerGet(P_LIFE)<0) PlayerSet(P_LIFE,0);
@@ -336,7 +325,7 @@ func HandlerPlayerUpdate()
 			else
 				ScrRequest( gs_fid("PlayerPlayDead") );
 		}
-		
+
 	// Check Respawn Position
 	status = PlayerGet(P_STATUS);
 	if( ( status==STATUS_IDLE || status==STATUS_WALK ) && 

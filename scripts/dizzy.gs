@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 #include "Data\\Scripts\\def.gs"
 #include "Data\\Scripts\\gamedef.gs"
+#include "Data\\Scripts\\death.gs"
 #include "Data\\Scripts\\sound.gs"
 #include "Data\\Scripts\\util.gs"
 #include "Data\\Scripts\\roomprops.gs"

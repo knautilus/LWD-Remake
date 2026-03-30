@@ -336,27 +336,16 @@ func PlayerPlayDeadWater()
 /////////////////////////////////////////////////////////////////////////////////
 func PlayerLoseLife()
 {
-	credit = PlayerGet(P_CREDITS)-1;
-	PlayerSet(P_CREDITS, credit);
-
-	death = PlayerGet(P_DEATH);
-	msg = PlayerDeathMessage(death);
-	if(msg!="") OpenDialogMessage(msg);
-	
-	if(credit==0)
-	{
-		OpenDialogMessage("YOU HAVE LOST\nALL YOUR LIVES!");
-		GameCommand(CMD_START);
-	}
-	else
-	{
-		// custom death respawn
-		fid = gs_fid("PlayerRespawn_"+(str)death);
-		if(fid!=-1) 
-			call(fid);
-		else 
-			PlayerRespawn(); // default respawn, at previous safe position
-	}
+    MusicStop();
+    credit = PlayerGet(P_CREDITS)-1;
+    PlayerSet(P_CREDITS, credit);
+    if(credit==0)
+    {
+        WaitFrames(120);
+        DeathText(); 
+        GameCommand(CMD_START);
+        return;
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////
