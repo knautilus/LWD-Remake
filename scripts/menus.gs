@@ -308,9 +308,10 @@ func OpenDialogControls()
 func OpenDialogCredits()
 {
 	// first page
-	text = "{a:center}CREDITS\n\n{c:0xffffffff}";
-	text += "GAME CREATED BY\n";
-	text += "{c:0xff0080ff}" + GAME_AUTHOR + "{c:0xffffffff}\n\n";
+	text = "{a:center}{c:0xffff00ff}REMAKE BY\n";
+	text += "{c:0xff00ffff}" + GAME_AUTHOR + "{c:0xffff00ff}\n\n";
+	text += "ORIGINAL GAME BY\n";
+	text += "{c:0xff00ffff}ALGAMES{c:0xffff00ff}\n\n";
 	text += "ORIGINAL DIZZY GAMES BY\n";
 	text += "{c:0xff0080ff}OLIVER TWINS\nAND CODEMASTERS{c:0xffffff00}\n";
 	OpenDialogMessage(text);

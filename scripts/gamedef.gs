@@ -4,14 +4,14 @@
 // Users adjust values in this file to match needs of their game.
 // Advanced users may need to adjust values in other files as well.
 /////////////////////////////////////////////////////////////////////////////////
-#def GAME_AUTHOR		"ALEXANDRU SIMION"					// game's author name (for the credits dialog)
-#def GAME_TITLE			"DizzyAGE Default Template"			// game's title (for the window title)
+#def GAME_AUTHOR		"Alexander & Yuri Utiansky"			// game's author name (for the credits dialog)
+#def GAME_TITLE			"Lost Woods Dizzy Remake"		// game's title (for the window title)
 #def GAME_WEBSITE 		"http://www.yolkfolk.com/dizzyage"	// game's website (for the final dialog)
 #def GAME_ID			"DT080127"							// game's id text, used in saved games - change this when you release a new version, to prevent old saved games to be loaded.
 
-#def MAXCREDITS			3		// max number of credits
-#def MAXCOINS			4		// max number of coins or diamonds to find (set it to the number of coins you added in your map)
-#def MAXINVENTORY		3		// max number of inventory items ( max 10 items )
+#def MAXCREDITS			1		// max number of credits
+#def MAXCOINS			20		// max number of coins or diamonds to find (set it to the number of coins you added in your map)
+#def MAXINVENTORY		1		// max number of inventory items ( max 10 items )
 #def LOADINGTIME		1		// minimum number of seconds to wait on the loading page
 #def MUSIC_DEFAULT		1		// id of the default music, for more details see the sound.gs file
 #def FONT_DEFAULT		4		// id of the default font
