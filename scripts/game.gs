@@ -146,29 +146,16 @@ func LoadUserData( file )
 /////////////////////////////////////////////////////////////////////////////////
 func BeginNewGame()
 {
-    GameSet(G_COVER,1);
-    MusicPlay(MUSIC_DEFAULT,0,1);
-    
-    while(true)
-    {
-        stop;
-        if( GetKeyHit(KEY_ACTION) ) break;
-        if( GetKeyHit(KEY_MENU) ) // some menu
-        {
-            OpenDialogMainMenu();
-        }
-    }
     InventoryScroll();
     ClearKeys();
-    GameSet(G_COVER,0);
     GameSet(G_PAUSE,0);
     ObjSet(ObjFind(300),O_STATUS,1);
     PlayerSet(P_CREDITS,1);
     PlayerSet(P_LIFE,100);
-
-    // init player
     PlayerSetPos(584,382);
     PlayerSet(P_DISABLE,0);
+    MusicFade(0,0);
+    MusicPlay(MUSIC_DEFAULT,0,1);
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -429,7 +416,7 @@ func ActionObject_14()
             money = PlayerGet(P_COINS)-MAXCOINS;
             PlayerSet(P_COINS,money);
             GameCommand(CMD_REFRESH);
-            Message2(4,5,"\"WOW! TWENTY GOLD COINS.\nIMPRESSIVE! NOW\nYOU CAN PASS!\"");
+            Message2(4,5,"\"WOW! TWENTY GOLD COINS.\nIMPRESSIVE!\nNOW YOU CAN PASS!\"");
             MessagePop();
             ObjSet(ObjFind(15),O_DISABLE,0);
             BrushSet(BrushFind(26),B_DRAW,0);
