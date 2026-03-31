@@ -20,8 +20,8 @@
 #def PLAYER_MAINMENUX	400		// set the player's position x in the mainmenu room (attract mode room)
 #def PLAYER_MAINMENUY	246		// set the player's position y in the mainmenu room (attract mode room)
 #def PLAYER_LAYER		5		// set the player's layer in the game (player gets painted last in it's layer)
-#def PLAYER_BEGINX		640		// set the starting positon x of the player in map (when a new game begins)
-#def PLAYER_BEGINY		246		// set the starting positon y of the player in map (when a new game begins)
+#def PLAYER_BEGINX		584		// set the starting positon x of the player in map (when a new game begins)
+#def PLAYER_BEGINY		382		// set the starting positon y of the player in map (when a new game begins)
 #def PLAYER_BUBBLES		12		// set this to the count of air bubble objects you placed in the map. used in WaterPlay
 
 #def SUPPORT_WATERPLAY	0		// set to 1 if player can enter in water, swim, etc, or to 0 otherwise

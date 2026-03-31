@@ -150,9 +150,9 @@ func BeginNewGame()
     ClearKeys();
     GameSet(G_PAUSE,0);
     ObjSet(ObjFind(300),O_STATUS,1);
-    PlayerSet(P_CREDITS,1);
+    PlayerSet(P_CREDITS,MAXCREDITS);
     PlayerSet(P_LIFE,100);
-    PlayerSetPos(584,382);
+    PlayerSetPos(PLAYER_BEGINX,PLAYER_BEGINY);
     PlayerSet(P_DISABLE,0);
     MusicFade(0,0);
     MusicPlay(MUSIC_DEFAULT,0,1);
